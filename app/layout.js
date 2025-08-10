@@ -12,8 +12,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "QlooMate - AI-Powered Go-To Companion",
-  description: "Transform your email inbox into personalized recommendations using AI and cultural intelligence",
+  title: "TeamX",
+  description: "Appwrite + Railway Template",
 };
 
 export default function RootLayout({ children }) {

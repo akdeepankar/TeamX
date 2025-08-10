@@ -9,6 +9,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [mode, setMode] = useState('signin'); // 'signin' | 'signup'
@@ -41,6 +42,9 @@ export default function Home() {
       if (!email.trim() || !password.trim()) {
         throw new Error('Email and password are required');
       }
+      if (mode === 'signup' && !name.trim()) {
+        throw new Error('Name is required');
+      }
       if (password.length < 8) {
         throw new Error('Password must be at least 8 characters long.');
       }
@@ -53,7 +57,7 @@ export default function Home() {
       if (mode === 'signin') {
         await signInWithEmail(email.trim(), password);
       } else {
-        const result = await createAccountWithEmail(email.trim(), password);
+        const result = await createAccountWithEmail(email.trim(), password, name.trim());
         if (!result?.success) {
           if (result.error === 'EMAIL_EXISTS') {
             throw new Error('This email is already registered. Please sign in.');
@@ -95,7 +99,7 @@ export default function Home() {
             Welcome
           </h1>
           <p className="text-gray-600">
-            Sign in with your email and password
+            {mode === 'signin' ? 'Sign in with your email and password' : 'Create your account'}
           </p>
         </div>
 
@@ -107,6 +111,19 @@ export default function Home() {
             </div>
           )}
           <form onSubmit={handleSubmit} className="space-y-4">
+            {mode === 'signup' && (
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Your name"
+                  required={mode === 'signup'}
+                />
+              </div>
+            )}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
               <input
