@@ -281,7 +281,7 @@ const TeamsList = ({ onSelect, selectedTeamId, reloadFlag, currentUser }) => {
             {infoDeleteError && (
               <div className="mb-3 p-2 text-sm bg-red-50 border border-red-200 rounded text-red-700">{infoDeleteError}</div>
             )}
-            <p className="text-sm text-gray-700">Are you sure you want to delete "{infoTeam?.name}"? This action cannot be undone.</p>
+            <p className="text-sm text-gray-700">Are you sure you want to delete &quot;{infoTeam?.name}&quot;? This action cannot be undone.</p>
             <div className="mt-4 flex justify-end gap-2">
               <button
                 className="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50"
