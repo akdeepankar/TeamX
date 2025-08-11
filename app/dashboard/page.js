@@ -942,7 +942,7 @@ function DashboardContent() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+  <div className="min-h-screen bg-gray-100">
       {/* Minimal Header */}
       <header className="bg-white border-b border-gray-200">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1006,7 +1006,8 @@ function DashboardContent() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Join Team Card */}
             <div className="bg-white rounded-xl p-6 shadow-sm">
-              <h3 className="text-lg font-medium text-gray-900 mb-2">Join team with code</h3>
+              <img src="/team.png" alt="Team" className="w-64 h-64 object-contain mx-auto mb-4" />
+              <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Join team with code</h3>
               <p className="text-sm text-gray-600 mb-4">Enter a team join code.</p>
               {joinError && <div className="mb-3 p-2 text-sm bg-red-50 border border-red-200 rounded text-red-700">{joinError}</div>}
               {joinMessage && <div className="mb-3 p-2 text-sm bg-green-50 border border-green-200 rounded text-green-700">{joinMessage}</div>}
@@ -1073,7 +1074,8 @@ function DashboardContent() {
 
             {/* Create Team Card */}
               <div className="bg-white rounded-xl p-6 shadow-sm">
-              <h3 className="text-lg font-medium text-gray-900 mb-2">Create a Team</h3>
+              <img src="/team.svg" alt="Create team" className="w-64 h-64 object-contain mx-auto mb-4" />
+              <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Create a Team</h3>
               <p className="text-sm text-gray-600 mb-4">Create a new team in Appwrite.</p>
               {createError && <div className="mb-3 p-2 text-sm bg-red-50 border border-red-200 rounded text-red-700">{createError}</div>}
               {createMessage && <div className="mb-3 p-2 text-sm bg-green-50 border border-green-200 rounded text-green-700">{createMessage}</div>}
@@ -1655,28 +1657,28 @@ function DashboardContent() {
                     )}
                   </div>
                 ) : (
-                  <div>
+                  <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-4">
                     <div className="flex items-center justify-between mb-3">
-                      <div className="flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 text-emerald-600">
+                      <div className="flex items-center gap-3 bg-gradient-to-r from-indigo-50 to-white px-3 py-2 rounded-xl border border-indigo-100">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 text-indigo-600">
                           <path d="M3 6.75A.75.75 0 013.75 6h8.5a.75.75 0 010 1.5h-8.5A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h12.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm.75 4.5a.75.75 0 000 1.5h16.5a.75.75 0 000-1.5H3.75z" />
                           </svg>
-                        <h3 className="text-lg font-medium text-gray-900">{activeActivitiesTab === 'mine' ? 'My Activities' : 'Activities'}</h3>
+                        <h3 className="text-xl font-semibold text-gray-900">{activeActivitiesTab === 'mine' ? 'My Activities' : 'Activities'}</h3>
                         </div>
                       <button 
                         onClick={() => setShowActivitiesChooser((s) => !s)}
-                        className="px-3 py-1.5 rounded-md text-sm font-medium bg-indigo-600 text-white hover:bg-indigo-700"
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium bg-indigo-600 text-white shadow-sm hover:shadow-md hover:bg-indigo-700"
                       >
                         Add Activity
                     </button>
                   </div>
-                    {activeActivitiesTab === 'mine' && <h4 className="text-sm font-medium text-gray-700 mb-2">My Activities</h4>}
-                    {activeActivitiesTab === 'all' && <h4 className="text-sm font-medium text-gray-700 mb-2">All Activities</h4>}
+                    {activeActivitiesTab === 'mine' && <h4 className="inline-flex items-center gap-2 text-xs font-semibold text-indigo-800 bg-indigo-50 border border-indigo-100 px-2.5 py-1 rounded-full mb-3">My Activities</h4>}
+                    {activeActivitiesTab === 'all' && <h4 className="inline-flex items-center gap-2 text-xs font-semibold text-indigo-800 bg-indigo-50 border border-indigo-100 px-2.5 py-1 rounded-full mb-3">All Activities</h4>}
                     {!activities?.length ? (
-                      <p className="text-xs text-gray-500">No activities yet.</p>
+                      <p className="text-sm text-gray-500 border border-dashed border-gray-300 rounded-lg p-4 bg-gray-50">No activities yet.</p>
                     ) : (
-                      <div className="max-h-64 overflow-auto pr-1">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <div className="max-h-80 overflow-auto pr-1">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                           {[...activities]
                             .filter((a) => activeActivitiesTab === 'all' ? true : (a.createdBy?.id === user.$id))
                             .sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0))
@@ -1684,7 +1686,7 @@ function DashboardContent() {
                               <div
                                 key={a.id}
                                 onClick={() => { setViewingActivity(a); setIsActivityOpen(true); }}
-                                className="border border-gray-200 rounded-md p-3 cursor-pointer hover:bg-gray-50"
+                                className="border border-gray-200 rounded-xl p-4 cursor-pointer bg-white/70 backdrop-blur-sm hover:bg-white hover:border-indigo-200 shadow-sm hover:shadow transition"
                               >
                                 <div className="flex items-start justify-between">
                                   <div className="min-w-0">
@@ -1700,7 +1702,7 @@ function DashboardContent() {
                                           ? 'bg-fuchsia-100 text-fuchsia-800'
                                           : 'bg-gray-100 text-gray-800';
                                         return (
-                                          <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium ${styles}`}>
+                                          <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium ring-1 ring-inset ring-black/5 ${styles}`}>
                                             {t.toUpperCase()}
                                           </span>
                                         );
